@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <title>A Web Page</title>
+        <link href="css/styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="login-page">
+            <div class="form">
+                <form class="register-form">
+                    <label>Nombre (s)</label>
+                    <input type="text" id="firstname" class="letras" placeholder="Ingresa tu nombre" required/>
+                    <label>Apellido (s)</label>
+                    <input type="text" id="lastname" class="letras" placeholder="Ingresa tu apellido" required/>
+                    <label>Correo</label>
+                    <input type="text" id="register-email" placeholder="Ingresa tu correo" required/>
+                    <label>Contraseña</label>
+                    <input type="password" id="register-password" placeholder="Ingresa tu contraseña" required/>
+                    <label>Confirmar contraseña</label>
+                    <input type="password" id="confirm-password" placeholder="Ingresa tu contraseña nuevamente" required/>
+                    <button id="register">Confirmar</button>
+                    <p class="message">¿Ya eres miembro? <a href="#">Inicia sesión</a></p>
+                </form>
+                <form class="login-form">
+                    <label>Correo</label>
+                    <input type="text" id="login-email" placeholder="Ingresa tu correo" value="nombre@correo.com"/>
+                    <label>Contraseña</label>
+                    <input type="password" id="login-password" placeholder="Ingresa tu contraseña" value="contrasena"/>
+                    <button id="login">Acceder</button>
+                    <p class="message">¿No tienes una cuenta? <a href="#">Registrate</a></p>
+                </form>
+            </div>
+          </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+</html>
