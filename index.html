@@ -10,23 +10,27 @@
             <div class="form">
                 <form class="register-form">
                     <label>Nombre (s)</label>
-                    <input type="text" id="firstname" class="letras" placeholder="Ingresa tu nombre" required/>
+                    <input type="text" id="firstname" class="letras" placeholder="Ingresa tu nombre" required />
                     <label>Apellido (s)</label>
-                    <input type="text" id="lastname" class="letras" placeholder="Ingresa tu apellido" required/>
+                    <input type="text" id="lastname" class="letras" placeholder="Ingresa tu apellido" required />
                     <label>Correo</label>
-                    <input type="text" id="register-email" placeholder="Ingresa tu correo" required/>
+                    <input type="email" id="register-email" placeholder="Ingresa tu correo" required />
+                    <label>Género</label><br>
+                    <input type="radio" id="radio-male" name="gender" value="male" required />Masculino
+                    <input type="radio" id="radio-female" name="gender" value="female" required />Femenino               
+                    <br>
                     <label>Contraseña</label>
-                    <input type="password" id="register-password" placeholder="Ingresa tu contraseña" required/>
+                    <input type="password" id="register-password" placeholder="Ingresa tu contraseña" required />
                     <label>Confirmar contraseña</label>
-                    <input type="password" id="confirm-password" placeholder="Ingresa tu contraseña nuevamente" required/>
+                    <input type="password" id="confirm-password" placeholder="Ingresa tu contraseña nuevamente" required />
                     <button id="register">Confirmar</button>
                     <p class="message">¿Ya eres miembro? <a href="#">Inicia sesión</a></p>
                 </form>
                 <form class="login-form">
                     <label>Correo</label>
-                    <input type="text" id="login-email" placeholder="Ingresa tu correo" value="nombre@correo.com"/>
+                    <input type="email" id="login-email" placeholder="Ingresa tu correo" />
                     <label>Contraseña</label>
-                    <input type="password" id="login-password" placeholder="Ingresa tu contraseña" value="contrasena"/>
+                    <input type="password" id="login-password" placeholder="Ingresa tu contraseña" />
                     <button id="login">Acceder</button>
                     <p class="message">¿No tienes una cuenta? <a href="#">Registrate</a></p>
                 </form>

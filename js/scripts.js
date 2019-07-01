@@ -114,7 +114,7 @@ $('#confirm-password').change(function (){
     var password = document.getElementById('register-password').value;
     var confirmacion = document.getElementById('confirm-password').value;
     if(confirmacion != password){
-        document.getElementById('confirm-password').style.color = "red";
+        document.getElementById('confirm-password').style.background = "La contraseña no coincide";
     } else {
         document.getElementById('confirm-password').setCustomValidity("");
     }
