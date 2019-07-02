@@ -5,11 +5,13 @@ var loginURL = 'http://api.events.indqtech.com/users/login';
 
 var login_user = {email:"", password:""};
 var register_user = {firstName:"", lastName:"", email:"", password:"", gender:""};
+var session_user = {id: "", token: "", firstName: "", lastName: ""};
 
 var firstName = "";
 var lastName = "";
 var email = "";
 var password = "";
+var confirmacion = "";
 var gender = "";
 
 $('.message a').click(function(){
@@ -23,18 +25,18 @@ $('#login').click(function() {
 
     login_user.email = email;
     login_user.password = password;
-    console.log(login_user);
 
     fetch(loginURL, {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(login_user), // data can be `string` or {object}!
-    headers:{
-        'Content-Type': 'application/json'
-    }
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(login_user), // data can be `string` or {object}!
+        headers:{
+            'Content-Type': 'application/json'
+        }
     }).then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+    .catch(error => console.error(error))
+    .then(response => console.log(response));
 });
+
 
 /* *************************************************************************************************** */
 $('#register').click(function(){
@@ -42,23 +44,37 @@ $('#register').click(function(){
     lastName = document.getElementById("lastname").value;
     email = document.getElementById("register-email").value;
     password = document.getElementById("register-password").value;
+    confirmacion = document.getElementById('confirm-password').value;
+    gender = document.getElementsByClassName('register-form')[0].gender.value;
+    console.log(gender);
+    if(!validar_email(email)){
+        alert("El correo electrónico ingresado es incorrecto");
+        event.preventDefault();
+    } else if(!validar_longitud(password, confirmacion)){
+        alert("La contraseña debe tener un mínimo de 8 caracteres");
+        event.preventDefault();
+    } else if(!validar_confirmacion(password, confirmacion)){
+        alert("La contraseña no coincide");
+        event.preventDefault();
+    } else {
+ 
+        register_user.firstName = firstName;
+        register_user.lastName = lastName;
+        register_user.email = email;
+        register_user.password = password;
+        register_user.gender = gender;
 
-    register_user.firstName = firstName;
-    register_user.lastName = lastName;
-    register_user.email = email;
-    register_user.password = password;
-    register_user.gender = "male";
-    console.log(register_user);
-
-    fetch(registerURL, {
-        method: 'POST', // or 'PUT'
-        body: JSON.stringify(register_user), // data can be `string` or {object}!
-        headers:{
-            'Content-Type': 'application/json'
-        }
+        fetch(registerURL, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(register_user), // data can be `string` or {object}!
+            headers:{
+                'Content-Type': 'application/json'
+            }
         }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+        .catch(error => console.error(error))
+        .then(response => console.log(response));
+        event.preventDefault();
+    }
 });
 
 /* VALIDACION ACEPTA SOLO LETRAS */
@@ -85,37 +101,29 @@ $(".letras").keypress(function (key) {
     return false;
 });
 
-/* VALIDACION CORREO ELECTRONICO */
-$('#register-email').change(function (){
-    var campo = document.getElementById('register-email');
-    
+function validar_email(email){
     //var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     var emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     
-    if (emailRegex.test(campo.value)) {
-      document.getElementById('register-email').setCustomValidity("");
+    if (emailRegex.test(email)) {
+      return true;
     } else {
-      document.getElementById('register-email').setCustomValidity("El correo electrónico ingresado es incorrecto");
+      return false;
     }
-});
+}
 
-/* VALIDACION CONTRASENA */
-$('#register-password').change(function (){
-    var password = document.getElementById('register-password').value;
-    if(password.length < 8){
-        document.getElementById('register-password').setCustomValidity("La contraseña debe tener un mínimo de 8 caracteres");
+function validar_longitud(password, confirmacion){
+    if(password < 8 || confirmacion < 8){
+        return false;
     } else {
-        document.getElementById('register-password').setCustomValidity("");
+        return true;
     }
-});
+}
 
-/* VALIDACION CONFIRMACION */
-$('#confirm-password').change(function (){
-    var password = document.getElementById('register-password').value;
-    var confirmacion = document.getElementById('confirm-password').value;
-    if(confirmacion != password){
-        document.getElementById('confirm-password').style.background = "La contraseña no coincide";
+function validar_confirmacion(password, confirmacion){
+    if(password == confirmacion){
+        return true;
     } else {
-        document.getElementById('confirm-password').setCustomValidity("");
+        return false;
     }
-});
+}
